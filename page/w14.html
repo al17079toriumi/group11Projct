@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="parent.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
+    <title>課題情報</title>
+</head>
+<body>
+    <div class="parent">
+        <h1 class="uk-article-title">課題情報登録</h1>
+        <p class="uk-text-muted">ここでは、課題情報の登録を行えます</p>
+        <form >
+            <div class="uk-margin">
+                <p class="uk-text-bold">課題名　　　</p>
+            <div class="uk-inline">
+                <input name="name" class="uk-input" type="text">
+            </div>
+            </div>
+            
+            <div class="uk-margin">
+                <p class="uk-text-bold">内容　　　　</p>
+                <div class="uk-inline">
+                    <input  name="content" class="uk-input" type="text">
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <p class="uk-text-bold">提出期間　　</p>
+                <div class="uk-inline">
+                    <input name="limit" class="uk-input" type="text" id="wkDateTime">
+            </div>
+        </form>
+        <br>
+        <br>
+        <div class="uk-button">
+            <a class="uk-button uk-button-danger uk-button-large" href="javascript:history.back();">戻る</a> 
+            <a class="uk-button uk-button-primary uk-button-large"type="submit" href="#">確認</a> 
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#wkDateTime").datetimepicker();
+        });
+    </script>
+</body>
+</html>
