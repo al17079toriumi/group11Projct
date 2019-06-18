@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" type="text/css" href="parent.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parent.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -33,7 +33,7 @@
     </form>
     <div class="uk-button">
         <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
-        <a class="uk-button uk-button-secondary uk-button-large " href="w2.html">新規登録</a>
+        <a class="uk-button uk-button-secondary uk-button-large " href="/register">新規登録</a>
         <a class="uk-button uk-button-primary uk-button-large " href="#">ログイン</a>
         </div>
     </div>
