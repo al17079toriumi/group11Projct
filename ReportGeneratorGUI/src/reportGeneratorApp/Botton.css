@@ -1,0 +1,23 @@
+.modoruButton{
+	-fx-background-color: #316fff;
+	-fx-text-fill: white;
+	-fx-background-radius: 0px 0px 0px 0px;
+}
+.modoruButton:hover {
+    -fx-background-color: #3972d3;
+}
+.modoruButton:pressed {
+	-fx-background-color: #2f5eb5;
+}
+
+.seiseiButton{
+	-fx-background-color: #f86782;
+	-fx-text-fill: white;
+	-fx-background-radius: 0px 0px 0px 0px;
+}
+.seiseiButton:hover {
+    -fx-background-color: #f84f71;
+}
+.seiseiButton:pressed {
+	-fx-background-color: #d64063;
+}
