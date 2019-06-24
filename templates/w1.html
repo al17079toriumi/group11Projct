@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parent.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
+    <title>ログイン</title>
+</head>
+<body>
+    <div class="parent">
+    <h1 class="uk-article-title">ログイン</h1>
+    <p class="uk-text-muted">あなたの情報を入力してください</p>
+    <form>
+    
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                <input name = "username" class="uk-input" type="text" placeholder="ID">
+            </div>
+        </div>
+    
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input name = "password" class="uk-input" type="password" placeholder="password">
+            </div>
+        </div>
+    
+    </form>
+    <div class="uk-button">
+        <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
+        <a class="uk-button uk-button-secondary uk-button-large " href="/register">新規登録</a>
+        <a class="uk-button uk-button-primary uk-button-large " href="#">ログイン</a>
+        </div>
+    </div>
+    </div>
+    
+</body>
+</html>
