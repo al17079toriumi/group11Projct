@@ -7,7 +7,7 @@ import bcrypt
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'kenpa'
+app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'qazwsx'
 app.config['MYSQL_DB'] = 'USERDB'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
@@ -26,7 +26,8 @@ def register():
     else:
         cur = mysql.connection.cursor()
         username = request.form['username']
-        cur.execute('SELECT * FROM users WHERE username = %s',[username])
+        select_stmt = 'SELECT * FROM users WHERE username = "%s"' %username
+        cur.execute(select_stmt)
         users = cur.fetchall()
         if users:
             flash("UserID already in used.","Error")
@@ -67,4 +68,4 @@ def login():
             flash('Error! User not found.','Error')
             return redirect(url_for('login'))
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0",port=80)
