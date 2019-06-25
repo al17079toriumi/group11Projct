@@ -7,7 +7,7 @@ import bcrypt
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_USER'] = 'kenpa'
 app.config['MYSQL_PASSWORD'] = 'qazwsx'
 app.config['MYSQL_DB'] = 'USERDB'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
@@ -37,6 +37,9 @@ def register():
             password = request.form['password'].encode('utf-8')
             hash_password = bcrypt.hashpw(password,bcrypt.gensalt())
             permission = request.form['permission']
+            if len(username) > 255 or len(password) > 255:
+                flash("No No 255", "Error")
+                return redirect(url_for("register"))
             cur.execute('INSERT IGNORE INTO users(username,password,permission) VALUES (%s,%s,%s)',(username,hash_password,permission))
             mysql.connection.commit()
             session['username'] = request.form['username']
@@ -50,6 +53,10 @@ def login():
     else:
         username = request.form['username']
         password  = request.form['password'].encode('utf-8')
+        if len(username) > 255 or len(password) > 255:
+            flash("No No 255","Error")
+            print("No No 255")
+            return redirect(url_for("login"))
         cur = mysql.connection.cursor();
         cur.execute('SELECT * FROM users WHERE username=%s',(username,))
         user = cur.fetchone()
