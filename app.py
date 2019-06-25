@@ -26,7 +26,7 @@ def register():
     else:
         cur = mysql.connection.cursor()
         username = request.form['username']
-        cur.execute('SELECT * FROM users WHERE username = %s',[username])
+        cur.execute('SELECT * FROM users WHERE username = %s',(username,))
         users = cur.fetchall()
         if users:
             flash("UserID already in used.","Error")
