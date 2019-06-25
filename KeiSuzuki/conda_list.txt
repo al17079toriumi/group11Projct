@@ -1,0 +1,24 @@
+ca-certificates           2019.1.23                     0
+certifi                   2019.3.9                 py37_0  
+click                     7.0                      py37_0  
+flask                     1.0.2                    py37_1  
+itsdangerous              1.1.0                    py37_0  
+jinja2                    2.10.1                   py37_0  
+libprotobuf               3.6.0                h1a1b453_0  
+markupsafe                1.1.1            py37he774522_0  
+mysql-connector-c         6.1.11               h33f27b4_0  
+mysql-connector-python    8.0.13           py37h13ed8b8_0  
+openssl                   1.1.1b               he774522_1  
+pip                       19.1.1                   py37_0  
+protobuf                  3.6.0            py37he025d50_0  
+python                    3.7.3                h8c8aaf0_1  
+setuptools                41.0.1                   py37_0  
+six                       1.12.0                   py37_0  
+sqlite                    3.28.0               he774522_0  
+vc                        14.1                 h0510ff6_4  
+vs2015_runtime            14.15.26706          h3a45250_4  
+werkzeug                  0.15.2                     py_0  
+wheel                     0.33.2                   py37_0  
+wincertstore              0.2                      py37_0  
+zlib                      1.2.11               h62dcd97_3
+
