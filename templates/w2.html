@@ -28,14 +28,14 @@
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
-                    <input name = "username" class="uk-input" type="text" placeholder="ID" maxlength="255">
+                    <input name = "username" class="uk-input" type="text" placeholder="ID">
                 </div>
             </div>
             
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input name="password" class="uk-input" type="password" placeholder="password" maxlength="255">
+                    <input name="password" class="uk-input" type="password" placeholder="password">
                 </div>
             </div>
                 <group class="inline-radio">
@@ -54,6 +54,15 @@
 
         
     </div>
+    <script>
+        function check() {
+            var getText1 = document.form.username.value;
+            var getText2 = document.form.password.value;
+            if (getText1.length >= 255 || getText2.length >= 255) {
+                alert("no no 255");
+            }
+        }
+    </script>
     
 </body>
 </html>
