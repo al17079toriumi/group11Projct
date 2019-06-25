@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
     <title>新規登録</title>
 </head>
 <body>
@@ -46,7 +51,19 @@
                 
             <div class="uk-button">
             <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
-            <input onClick = "check()" type="submit" class="uk-button uk-button-primary uk-button-large" value="登録" ></input>
+            <button  onClick = "check()" class="uk-button uk-button-primary uk-button-large"  >登録</input>
+        $(function(){
+            var count=255;
+            $("button").click(function(){
+                var text = $(input).text();
+                var textlength = text.length;
+                if(textlength < count){
+                    $("form").submit();
+                }else{ 
+                    alert("no no 255"); 
+                } 
+            }); 
+        });
         </div>
         </form>
         <br>
@@ -54,15 +71,6 @@
 
         
     </div>
-    <script>
-        function check() {
-            var getText1 = document.form.username.value;
-            var getText2 = document.form.password.value;
-            if (getText1.length >= 255 || getText2.length >= 255) {
-                alert("no no 255");
-            }
-        }
-    </script>
     
 </body>
 </html>
