@@ -15,14 +15,14 @@ app.secret_key = os.urandom(24)
 
 mysql = MySQL(app)
 
-@app.route('/')
+@app.route('/home')
 def hello_world():
-    return render_template('index.html')
+    return render_template('w5.html')
 
 @app.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'GET':
-        return render_template('w2.html')
+        return render_template('w2.html',messages=None)
     else:
         cur = mysql.connection.cursor()
         username = request.form['username']

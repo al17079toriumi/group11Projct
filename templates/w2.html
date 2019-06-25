@@ -15,7 +15,7 @@
     {% with messages = get_flashed_messages(category_filter=["Error"]) %}
     {% if messages %}
     <ul class=flashes>
-        {% for category, message in messages %}
+        {% for message in get_flashed_messages() %}
         <li class="{{ category }}">{{ message }}</li>
         {% endfor %}
     </ul>
@@ -24,7 +24,7 @@
     <div class="parent">
         <h1 class="uk-article-title">新規登録</h1>
         <p class="uk-text-muted">登録するあなたの情報を入力してください</p>
-        <form>
+        <form method="post" action="/register">
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
@@ -38,26 +38,18 @@
                     <input name="password" class="uk-input" type="password" placeholder="password">
                 </div>
             </div>
-
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input  name = "password" class="uk-input" type="password" placeholder="Re-enter password">
-                </div>
-            </div>
-            <form>
                 <group class="inline-radio">
-                    <div><input type="radio" name="member"><label>学生</label></div>
-                    <div><input type="radio" name="member" checked><label>指導者</label></div>
+                    <div><input type="radio" name="permission" value="0"><label>学生</label></div>
+                    <div><input type="radio" name="permission" value="1" checked><label>指導者</label></div>
                 </group>
-            </form>
+            <div class="uk-button">
+            <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
+            <input type="submit" class="uk-button uk-button-primary uk-button-large" value="登録" ></input>
+        </div>
         </form>
         <br>
         
-        <div class="uk-button">
-            <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
-            <a class="uk-button uk-button-primary uk-button-large " href="#">登録</a>
-        </div>
+
         
     </div>
     
