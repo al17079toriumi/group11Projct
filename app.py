@@ -67,4 +67,4 @@ def login():
             flash('Error! User not found.','Error')
             return redirect(url_for('login'))
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0",port=80)
