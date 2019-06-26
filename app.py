@@ -61,6 +61,7 @@ def login():
         cur.execute('SELECT * FROM users WHERE username=%s',(username,))
         user = cur.fetchone()
         cur.close()
+        print(user)
         print("True" if user else "False")
         if user:
             if bcrypt.hashpw(password,user['password'].encode('utf-8')) == user['password'].encode('utf-8'):
