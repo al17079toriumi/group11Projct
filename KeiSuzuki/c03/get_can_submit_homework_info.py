@@ -1,10 +1,10 @@
-from flask import request, jsonify, Blueprint, render_template
+from flask import request, jsonify, Blueprint, render_template, session
 import logging
 import json
 
 from c03.test_for_c03 import c9m2
 
-get_can_submit_homework_info_app = Blueprint('get_can_submit_homework_info', __name__)
+get_can_submit_homework_info_app = Blueprint('get_can_submit_homework_info', __name__, template_folder="templates")
 app = get_can_submit_homework_info_app
 
 
@@ -13,26 +13,18 @@ def get_can_submit_homework_info():
 
     if request.method == 'GET':
 
-        # get userID from request
-        user_id = request.args.get('userID')
-        if user_id is None:
-            logging.error("userID not in prams")
-            #return render_template("w7.html", "failed")
-            return render_template("w7.html")
+        if 'username' in session:
+            user_id = session['username']
         else:
-            logging.debug("request has userID")
+            user_id = "sample"
 
-        dict_of_homework_info = c9m2(user_id)
-        if dict_of_homework_info is None:
+        homework_list = c9m2(user_id)
+        if homework_list is None:
             logging.error("failed get from c9m2")
-            #return render_template("w7.html", "failed")
-            return render_template("w7.html")
+            return render_template("w7.html", error=True)
         else:
             logging.info("getting from c9m2 is success")
 
         logging.info("success get_can_submit_homework_info")
 
-        str_json = json.dumps(dict_of_homework_info, ensure_ascii=False)
-
-        #return render_template("w7.html", str_json)
-        return render_template("w7.html")
+        return render_template("w7.html", homework_list=homework_list)

@@ -16,6 +16,11 @@
     <div class="parent">
         <h1 class="uk-article-title">課題提出</h1>
         <p class="uk-text-muted">提出する課題を選択してください</p>
+        <ul>
+            {{% for homework in homework_dict %}}
+            <li>{{ homework.about_homework }}</li>
+            {{% endfor %}}
+        </ul>
         <div class="js-upload uk-placeholder uk-text-center">
             <span uk-icon="icon: cloud-upload"></span>
             <span class="uk-text-middle">ファイルをドロップ　または</span>

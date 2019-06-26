@@ -16,14 +16,21 @@
     <div class="parent">
         <h1 class="uk-article-title">課題提出</h1>
         <p class="uk-text-muted">提出する課題を選択してください</p>
+        <form method="post" action="" enctype="multipart/form-data">
+        <ul>
+            {% for item in homework_list %}
+            <li><input type="radio" name="homeworkID" vlaue="{{ item }}">{{ item }}
+            {% endfor %}
+        </ul>
         <div class="js-upload uk-placeholder uk-text-center">
             <span uk-icon="icon: cloud-upload"></span>
             <span class="uk-text-middle">ファイルをドロップ　または</span>
             <div uk-form-custom>
-                <input type="file" multiple>
+                <input type="file" multiple name="uploadedFile">
                 <span class="uk-link">ファイルを選択</span>
             </div>
         </div>
+        </form>
     </div>
     <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
     

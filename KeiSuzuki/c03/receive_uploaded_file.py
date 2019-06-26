@@ -26,6 +26,7 @@ def upload_file():
         if 'uploadedFile' not in request.files:
             logging.error("request don't have uploadedFile")
             return render_template("w9.html")
+        
         if 'userID' not in request.form:
             logging.error("request don't have userID")
             return render_template("w9.html")
