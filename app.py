@@ -26,6 +26,11 @@ def register():
     else:
         cur = mysql.connection.cursor()
         username = request.form['username']
+        password = request.form['password'].encode('utf-8')
+        if not username or not password:
+            print("UserName or Password is null.")
+            flash("Error!UserName or Password is null.","Error")
+            return redirect(url_for("register"))
         select_stmt = 'SELECT * FROM users WHERE username = "%s"' %username
         cur.execute(select_stmt)
         users = cur.fetchall()
@@ -34,7 +39,6 @@ def register():
             cur.close()
             return redirect(url_for("register"))
         else:
-            password = request.form['password'].encode('utf-8')
             hash_password = bcrypt.hashpw(password,bcrypt.gensalt())
             permission = request.form['permission']
             if len(username) > 255 or len(password) > 255:
@@ -53,6 +57,10 @@ def login():
     else:
         username = request.form['username']
         password  = request.form['password'].encode('utf-8')
+        if not username or not password:
+            print("UserName or Password is null.")
+            flash("Error!UserName or Password is null.","Error")
+            return redirect(url_for("login"))
         if len(username) > 255 or len(password) > 255:
             flash("No No 255","Error")
             print("No No 255")
