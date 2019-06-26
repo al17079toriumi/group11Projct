@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script
-        src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
+            src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
     <title>新規登録</title>
 </head>
@@ -36,7 +36,7 @@
                     <input name = "username" class="uk-input" type="text" placeholder="ID">
                 </div>
             </div>
-            
+
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
@@ -48,33 +48,48 @@
                     <div><input type="radio" name="permission" value="1" checked><label>指導者</label></div>
                 </group>
                 <br>
-                
+
             <div class="uk-button">
             <a class="uk-button uk-button-danger uk-button-large " href="/login">戻る</a>
-            <input type="submit" class="uk-button uk-button-primary uk-button-large" value="登録" ></input>
-        <script>
-        $(function(){
-                var count=255;
-                var form = $('form');
-                form.submit(function(e){
-                    var text = $(input).text();
-                    var textlength = text.length;
-                    if(textlength < count){
-                        form.off('submit');
-                        form.submit();
-                    }
-                    alert("no no 255");
-                    return false; 
-                }); 
-        });
-        </script>
-        </div>
-        </form>
-        <br>
-        
+            <input type="submit" class="uk-button uk-button-primary uk-button-large" value="登録"></input>
 
-        
-    </div>
-    
+        </div>
+    </form>
+    <br>
+
+
+</div>
+<script>
+    $(function () {
+        var count = 255;
+        var form = $('form');
+        form.submit(function (e) {
+            var text = $(input).text();
+            var textlength = text.length;
+            if (textlength < count) {
+                form.off('submit');
+                form.submit();
+            }
+            alert("no no 255");
+            return false;
+        });
+
+    });
+
+    function OnPermissionClick() {
+        var val = $("input[name=permission]:checked").val();
+        if (val == 1) {
+            //指導者
+            $("#OAuthCode").slideDown(300);
+            $("#OAuthCodeText").prop('required',true);
+            console.log($('#OAuthCodeText'))
+
+        } else {
+            //生徒
+            $("#OAuthCode").slideUp(300);
+            $("#OAuthCodeText").prop('required',false);
+        }
+    }
+</script>
 </body>
 </html>
