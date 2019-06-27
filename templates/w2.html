@@ -17,39 +17,46 @@
     <title>新規登録</title>
 </head>
 <body>
-    {% with messages = get_flashed_messages(category_filter=["Error"]) %}
+{% with messages = get_flashed_messages(category_filter=["Error"]) %}
     {% if messages %}
-    <ul class=flashes>
-        {% for message in get_flashed_messages() %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
+        <ul class=flashes>
+            {% for message in get_flashed_messages() %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
-    {% endwith %}
-    <div class="parent">
-        <h1 class="uk-article-title">新規登録</h1>
-        <p class="uk-text-muted">登録するあなたの情報を入力してください</p>
-        <form method="post" action="/register">
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
-                    <input name = "username" class="uk-input" type="text" placeholder="ID">
-                </div>
+{% endwith %}
+<div class="parent">
+    <h1 class="uk-article-title">新規登録</h1>
+    <p class="uk-text-muted">登録するあなたの情報を入力してください</p>
+    <form method="post" action="/register">
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                <input name="username" class="uk-input" type="text" placeholder="ID" required>
             </div>
+        </div>
 
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input name="password" class="uk-input" type="password" placeholder="password">
-                </div>
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input name="password" class="uk-input" type="password" placeholder="password" required>
             </div>
-                <group class="inline-radio">
-                    <div><input type="radio" name="permission" value="0"><label>学生</label></div>
-                    <div><input type="radio" name="permission" value="1" checked><label>指導者</label></div>
-                </group>
-                <br>
+        </div>
+        <group class="inline-radio">
+            <div><input type="radio" name="permission" value="0" onclick="OnPermissionClick()"><label>学生</label></div>
+            <div><input type="radio" name="permission" value="1" checked onclick="OnPermissionClick()"><label>指導者</label></div>
+        </group>
+        <br>
 
-            <div class="uk-button">
+        <div class="uk-margin" id="OAuthCode">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: code"></span>
+                <input name = "code_text" class="uk-input" id="OAuthCodeText" type="password" placeholder="password">
+            </div>
+        </div>
+
+        <div class="uk-button">
             <a class="uk-button uk-button-danger uk-button-large " href="/login">戻る</a>
             <input type="submit" class="uk-button uk-button-primary uk-button-large" value="登録"></input>
 
@@ -81,13 +88,12 @@
         if (val == 1) {
             //指導者
             $("#OAuthCode").slideDown(300);
-            $("#OAuthCodeText").prop('required',true);
-            console.log($('#OAuthCodeText'))
+            $("#OAuthCodeText").prop('required', true);
 
         } else {
             //生徒
             $("#OAuthCode").slideUp(300);
-            $("#OAuthCodeText").prop('required',false);
+            $("#OAuthCodeText").prop('required', false);
         }
     }
 </script>
