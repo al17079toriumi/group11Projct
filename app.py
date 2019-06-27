@@ -15,6 +15,8 @@ app.secret_key = os.urandom(24)
 
 mysql = MySQL(app)
 
+auth_code = "NMXGfD0hgon3nD717qoW4DfwP26I0u7I"
+
 @app.route('/home')
 def hello_world():
     return render_template('w5.html')
@@ -31,17 +33,10 @@ def register():
 
         if permission == 1:
             input_code = request.form['code']
-
-
-
-            cur.execute("use authcode_db")
-
-            selected_num = cur.execute("SELECT * FROM codes_table WHERE code = %s",[input_code])
-            if selected_num == 0:
+            if input_code != auth_code:
                 print("認証不可")
                 flash("Error!Authorization code is not vaild.","Error")
                 return redirect(url_for("register"))
-            cur.execute("use userdb")
 
         if not username or not password:
             print("UserName or Password is null.")
