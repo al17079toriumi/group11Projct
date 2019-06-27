@@ -15,6 +15,12 @@
             src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
     <title>新規登録</title>
+    <style>
+        #OAuthCode{
+            display: none;
+        }
+        
+    </style>
 </head>
 <body>
 {% with messages = get_flashed_messages(category_filter=["Error"]) %}
@@ -44,15 +50,15 @@
             </div>
         </div>
         <group class="inline-radio">
-            <div><input type="radio" name="permission" value="0" onclick="OnPermissionClick()"><label>学生</label></div>
-            <div><input type="radio" name="permission" value="1" checked onclick="OnPermissionClick()"><label>指導者</label></div>
+            <div><input type="radio" name="permission" value="0" onclick="OnPermissionClick()" checked><label>学生</label></div>
+            <div><input type="radio" name="permission" value="1"  onclick="OnPermissionClick()"><label>指導者</label></div>
         </group>
         <br>
 
         <div class="uk-margin" id="OAuthCode">
             <div class="uk-inline">
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: code"></span>
-                <input name = "code_text" class="uk-input" id="OAuthCodeText" type="password" placeholder="password">
+                <input name = "code" class="uk-input" id="OAuthCodeText" type="text" placeholder="認証コード">
             </div>
         </div>
 

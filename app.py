@@ -27,6 +27,22 @@ def register():
         cur = mysql.connection.cursor()
         username = request.form['username']
         password = request.form['password'].encode('utf-8')
+        permission = int(request.form['permission'])
+
+        if permission == 1:
+            input_code = request.form['code']
+
+
+
+            cur.execute("use authcode_db")
+
+            selected_num = cur.execute("SELECT * FROM codes_table WHERE code = %s",[input_code])
+            if selected_num == 0:
+                print("認証不可")
+                flash("Error!Authorization code is not vaild.","Error")
+                return redirect(url_for("register"))
+            cur.execute("use userdb")
+
         if not username or not password:
             print("UserName or Password is null.")
             flash("Error!UserName or Password is null.","Error")
@@ -40,7 +56,6 @@ def register():
             return redirect(url_for("register"))
         else:
             hash_password = bcrypt.hashpw(password,bcrypt.gensalt())
-            permission = request.form['permission']
             if len(username) > 255 or len(password) > 255:
                 flash("No No 255", "Error")
                 return redirect(url_for("register"))
