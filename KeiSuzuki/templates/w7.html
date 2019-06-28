@@ -16,84 +16,14 @@
     <div class="parent">
         <h1 class="uk-article-title">課題提出</h1>
         <p class="uk-text-muted">提出する課題を選択してください</p>
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="post" action="receive_uploaded_file" enctype="multipart/form-data">
         <ul>
-            {% for item in homework_list %}
-            <li><input type="radio" name="homeworkID" vlaue="{{ item }}">{{ item }}
+            {% for homework in homework_list %}
+            <li><input type="radio" name="homeworkID" value="{{ homework.homework_id }}" required>{{ homework.about }}
             {% endfor %}
         </ul>
-        <div class="js-upload uk-placeholder uk-text-center">
-            <span uk-icon="icon: cloud-upload"></span>
-            <span class="uk-text-middle">ファイルをドロップ　または</span>
-            <div uk-form-custom>
-                <input type="file" multiple name="uploadedFile">
-                <span class="uk-link">ファイルを選択</span>
-            </div>
-        </div>
+        <input type="file" name="uploadedFile" required><br>
+        <input type="submit" value="送信">
         </form>
-    </div>
-    <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-    
-    <script>
-
-        var bar = document.getElementById('js-progressbar');
-
-        UIkit.upload('.js-upload', {
-
-            url: '',
-            multiple: true,
-
-            beforeSend: function () {
-                console.log('beforeSend', arguments);
-            },
-            beforeAll: function () {
-                console.log('beforeAll', arguments);
-            },
-            load: function () {
-                console.log('load', arguments);
-            },
-            error: function () {
-                console.log('error', arguments);
-            },
-            complete: function () {
-                console.log('complete', arguments);
-            },
-
-            loadStart: function (e) {
-                console.log('loadStart', arguments);
-
-                bar.removeAttribute('hidden');
-                bar.max = e.total;
-                bar.value = e.loaded;
-            },
-
-            progress: function (e) {
-                console.log('progress', arguments);
-
-                bar.max = e.total;
-                bar.value = e.loaded;
-            },
-
-            loadEnd: function (e) {
-                console.log('loadEnd', arguments);
-
-                bar.max = e.total;
-                bar.value = e.loaded;
-            },
-
-            completeAll: function () {
-                console.log('completeAll', arguments);
-
-                setTimeout(function () {
-                    bar.setAttribute('hidden', 'hidden');
-                }, 1000);
-
-                alert('Upload Completed');
-            }
-
-        });
-
-    </script>
-
 </body>
 </html>

@@ -16,6 +16,7 @@ def get_can_submit_homework_info():
         if 'username' in session:
             user_id = session['username']
         else:
+            #for debug
             user_id = "sample"
 
         homework_list = c9m2(user_id)

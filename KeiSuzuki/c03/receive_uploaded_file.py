@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, Blueprint, render_template
+from flask import Flask, request, jsonify, Blueprint, render_template, session
 import logging
 import os
 
@@ -26,20 +26,28 @@ def upload_file():
         if 'uploadedFile' not in request.files:
             logging.error("request don't have uploadedFile")
             return render_template("w9.html")
-        
-        if 'userID' not in request.form:
-            logging.error("request don't have userID")
-            return render_template("w9.html")
+
+        if 'username' in session:
+            user_id = session['username']
+        else:
+            logging.error("username not in session")
+
+            #for debug
+            user_id = "1"
+            #return render_template("w9.html")
+
         if 'homeworkID' not in request.form:
             logging.error("request don't have homeworkID")
             return render_template("w9.html")
 
         # get data from post request
-        user_id = request.form['userID']
         homework_id = request.form['homeworkID']
+        print("homeworkID"+homework_id)
 
         # check can int(str)
         try:
+            print(user_id)
+            print(homework_id)
             int(user_id)
             int(homework_id)
         except ValueError:
