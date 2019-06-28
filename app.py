@@ -15,27 +15,45 @@ app.secret_key = os.urandom(24)
 
 mysql = MySQL(app)
 
-@app.route('/')
+auth_code = "NMXGfD0hgon3nD717qoW4DfwP26I0u7I"
+
+@app.route('/home')
 def hello_world():
-    return render_template('index.html')
+    return render_template('w5.html')
 
 @app.route('/register',methods=['GET','POST'])
 def register():
     if request.method == 'GET':
-        return render_template('w2.html')
+        return render_template('w2.html',messages=None)
     else:
         cur = mysql.connection.cursor()
         username = request.form['username']
-        cur.execute('SELECT * FROM users WHERE username = %s',[username])
+        password = request.form['password'].encode('utf-8')
+        permission = int(request.form['permission'])
+
+        if permission == 1:
+            input_code = request.form['code']
+            if input_code != auth_code:
+                print("認証不可")
+                flash("Error!Authorization code is not vaild.","Error")
+                return redirect(url_for("register"))
+
+        if not username or not password:
+            print("UserName or Password is null.")
+            flash("Error!UserName or Password is null.","Error")
+            return redirect(url_for("register"))
+        select_stmt = 'SELECT * FROM users WHERE username = "%s"' %username
+        cur.execute(select_stmt)
         users = cur.fetchall()
         if users:
             flash("UserID already in used.","Error")
             cur.close()
             return redirect(url_for("register"))
         else:
-            password = request.form['password'].encode('utf-8')
             hash_password = bcrypt.hashpw(password,bcrypt.gensalt())
-            permission = request.form['permission']
+            if len(username) > 255 or len(password) > 255:
+                flash("No No 255", "Error")
+                return redirect(url_for("register"))
             cur.execute('INSERT IGNORE INTO users(username,password,permission) VALUES (%s,%s,%s)',(username,hash_password,permission))
             mysql.connection.commit()
             session['username'] = request.form['username']
@@ -49,11 +67,20 @@ def login():
     else:
         username = request.form['username']
         password  = request.form['password'].encode('utf-8')
-        cur = mysql.connection.cursor();
+        if not username or not password:
+            print("UserName or Password is null.")
+            flash("Error!UserName or Password is null.","Error")
+            return redirect(url_for("login"))
+        if len(username) > 255 or len(password) > 255:
+            flash("No No 255","Error")
+            print("No No 255")
+            return redirect(url_for("login"))
+        cur = mysql.connection.cursor()
         cur.execute('SELECT * FROM users WHERE username=%s',(username,))
         user = cur.fetchone()
         cur.close()
-
+        print(user)
+        print("True" if user else "False")
         if user:
             if bcrypt.hashpw(password,user['password'].encode('utf-8')) == user['password'].encode('utf-8'):
                 session['username'] = username
@@ -67,4 +94,4 @@ def login():
             flash('Error! User not found.','Error')
             return redirect(url_for('login'))
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0",port=80)

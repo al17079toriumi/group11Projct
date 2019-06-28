@@ -19,7 +19,7 @@
     <div class="parent">
         <h1 class="uk-article-title">内容確認</h1>
         <p class="uk-text-muted">登録する情報を確認してください</p>
-        <form>
+        <form method="POST" >
         <div class="uk-margin">
             <p class="uk-text-bold">課題名　　　</p>
             <div class="uk-inline">
@@ -39,13 +39,13 @@
             <div class="uk-inline">
                 <input name="limit" class="uk-input" type="text" id="wkDateTime">
             </div>
-        </form>
         <br>
         <br>
         <div class="uk-button">
             <a class="uk-button uk-button-danger uk-button-large" href="w14.html">戻る</a>
-            <a class="uk-button uk-button-primary uk-button-large" href="#">登録</a>
+            <input type="submit" class="uk-button uk-button-primary uk-button-large" value="登録"></input>
         </div>
+        </form>
     </div>
 </body>
 </html>

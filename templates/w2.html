@@ -6,60 +6,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
     <title>新規登録</title>
+    <style>
+        #OAuthCode{
+            display: none;
+        }
+        
+    </style>
 </head>
 <body>
-    {% with messages = get_flashed_messages(category_filter=["Error"]) %}
+{% with messages = get_flashed_messages(category_filter=["Error"]) %}
     {% if messages %}
-    <ul class=flashes>
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
+        <ul class=flashes>
+            {% for message in get_flashed_messages() %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
-    {% endwith %}
-    <div class="parent">
-        <h1 class="uk-article-title">新規登録</h1>
-        <p class="uk-text-muted">登録するあなたの情報を入力してください</p>
-        <form>
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
-                    <input name = "username" class="uk-input" type="text" placeholder="ID">
-                </div>
+{% endwith %}
+<div class="parent">
+    <h1 class="uk-article-title">新規登録</h1>
+    <p class="uk-text-muted">登録するあなたの情報を入力してください</p>
+    <form method="post" action="/register">
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
+                <input name="username" class="uk-input" type="text" placeholder="ID" pattern="^[0-9A-Za-Z]+$" maxlength="255" required>
             </div>
-            
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input name="password" class="uk-input" type="password" placeholder="password">
-                </div>
-            </div>
-
-            <div class="uk-margin">
-                <div class="uk-inline">
-                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                    <input  name = "password" class="uk-input" type="password" placeholder="Re-enter password">
-                </div>
-            </div>
-            <form>
-                <group class="inline-radio">
-                    <div><input type="radio" name="member"><label>学生</label></div>
-                    <div><input type="radio" name="member" checked><label>指導者</label></div>
-                </group>
-            </form>
-        </form>
-        <br>
-        
-        <div class="uk-button">
-            <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
-            <a class="uk-button uk-button-primary uk-button-large " href="#">登録</a>
         </div>
-        
-    </div>
-    
+
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input name="password" class="uk-input" type="password" placeholder="password" pattern="^[0-9A-Za-Z]+$" maxlength="255" required>
+            </div>
+        </div>
+        <group class="inline-radio">
+            <div><input type="radio" name="permission" value="0" onclick="OnPermissionClick()" checked><label>学生</label></div>
+            <div><input type="radio" name="permission" value="1"  onclick="OnPermissionClick()"><label>指導者</label></div>
+        </group>
+        <br>
+
+        <div class="uk-margin" id="OAuthCode">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: code"></span>
+                <input name = "code" class="uk-input" id="OAuthCodeText" type="text" placeholder="認証コード">
+            </div>
+        </div>
+
+        <div class="uk-button">
+            <a class="uk-button uk-button-danger uk-button-large " href="/login">戻る</a>
+            <input type="submit" class="uk-button uk-button-primary uk-button-large" value="登録"></input>
+
+        </div>
+    </form>
+    <br>
+
+
+</div>
+<script>
+    $(function () {
+        var count = 255;
+        var form = $('form');
+        form.submit(function (e) {
+            var text = $(input).text();
+            var textlength = text.length;
+            if (textlength < count) {
+                form.off('submit');
+                form.submit();
+            }
+            alert("no no 255");
+            return false;
+        });
+
+    });
+
+    function OnPermissionClick() {
+        var val = $("input[name=permission]:checked").val();
+        if (val == 1) {
+            //指導者
+            $("#OAuthCode").slideDown(300);
+            $("#OAuthCodeText").prop('required', true);
+
+        } else {
+            //生徒
+            $("#OAuthCode").slideUp(300);
+            $("#OAuthCodeText").prop('required', false);
+        }
+    }
+</script>
 </body>
 </html>
