@@ -29,7 +29,7 @@ logging.basicConfig(
     format='%(module)-18s %(funcName)-10s %(lineno)4s: %(message)s'
 )
 
-app.secret_key = "hoge"
+app.secret_key = "hogehoge"
 
 
 @app.route('/template/<window_name>')
